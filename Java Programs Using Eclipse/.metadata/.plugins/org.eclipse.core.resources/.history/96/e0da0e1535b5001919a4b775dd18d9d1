@@ -1,0 +1,11 @@
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Integer i=new Integer(2);
+		System.out.println(i);
+
+	}
+
+}

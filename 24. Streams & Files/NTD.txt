@@ -1,0 +1,57 @@
+﻿Imports System.Data.SqlClient
+Imports System.Data
+Public Class Form1
+    Dim con As New SqlConnection("Data Source=(LocalDB)\v11.0;AttachDbFilename=E:\vb.net\DATABASE\DATABASE\MYDATA.mdf;Integrated Security=True")
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        con.Open()
+        Dim cmd = New SqlCommand("insert into person(Id,Name,address,contactnumber,gender,EmailId) VALUES (@1,@2,@3,@4,@5,@6)", con)
+        cmd.Parameters.AddWithValue("@1", txtId.Text)
+        cmd.Parameters.AddWithValue("@2", txtName.Text)
+        cmd.Parameters.AddWithValue("@3", txtAddress.Text)
+        cmd.Parameters.AddWithValue("@4", txtNumber.Text)
+        cmd.Parameters.AddWithValue("@5", txtgender.Text)
+        cmd.Parameters.AddWithValue("@6", txtEmailId.Text)
+        cmd.ExecuteNonQuery()
+        con.Close()
+        lblresult.Text = "Data sucessfully Added"
+    End Sub
+
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+        txtId.Text = ""
+        txtAddress.Text = ""
+        txtEmailId.Text = ""
+        txtgender.Text = ""
+        txtName.Text = ""
+        txtNumber.Text = ""
+        lblresult.Text = "Clear"
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        con.Open()
+        Dim cmd = New SqlCommand("delete from person  where id=@1", con)
+        cmd.Parameters.AddWithValue("@1", txtId.Text)
+        cmd.ExecuteNonQuery()
+        con.Close()
+        lblresult.Text = "Data sucessfully delete"
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        con.Open()
+        Dim cmd = New SqlCommand("update person set Name=@2,address=@3 where id=@1 ", con)
+        ' Dim cmd = New SqlCommand("update set address=@3 where id=@1 ", con)
+        ' Dim cmd = New SqlCommand("update set contactnumber=@4 where id=@1 ", con)
+        ' Dim cmd = New SqlCommand("update set gender=@5 where id=@1 ", con)
+        ' Dim cmd = New SqlCommand("update set EmailId=@6 where id=@1 ", con)
+
+        cmd.Parameters.AddWithValue("@1", txtId.Text)
+        cmd.Parameters.AddWithValue("@2", txtName.Text)
+        cmd.Parameters.AddWithValue("@3", txtAddress.Text)
+        cmd.Parameters.AddWithValue("@4", txtNumber.Text)
+        cmd.Parameters.AddWithValue("@5", txtgender.Text)
+        cmd.Parameters.AddWithValue("@6", txtEmailId.Text)
+        cmd.ExecuteNonQuery()
+        con.Close()
+        lblresult.Text = "Data sucessfully updated"
+    End Sub
+End Class

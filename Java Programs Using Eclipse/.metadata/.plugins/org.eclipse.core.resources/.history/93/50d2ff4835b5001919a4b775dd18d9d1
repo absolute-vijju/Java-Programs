@@ -1,0 +1,13 @@
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		Integer i=new Integer(200);
+		System.out.println(i);
+		int i2=i;
+		System.out.println(i2);
+
+	}
+
+}
